@@ -20,7 +20,7 @@
     // Override point for customization after application launch.
     
     
-    self.window = [[UIWindow alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HIGHT)];
+    self.window = [[UIWindow alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
     
     HomeViewController *homeVC = [[HomeViewController alloc] init];
     
