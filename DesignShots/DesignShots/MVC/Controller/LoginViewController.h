@@ -1,5 +1,5 @@
 //
-//  PlayerFollowerViewController.h
+//  LoginViewController.h
 //  DesignShots
 //
 //  Created by lizhenjie on 4/29/16.
@@ -9,8 +9,8 @@
 #import <UIKit/UIKit.h>
 
 /**
- *  Player Follower
+ *  Login Dribbble
  */
-@interface PlayerFollowerViewController : UIViewController
+@interface LoginViewController : UIViewController
 
 @end

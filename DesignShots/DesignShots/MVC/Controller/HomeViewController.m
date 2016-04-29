@@ -34,6 +34,12 @@
 //                  image:[UIImage imageNamed:@"nav_back_icon"]
 //            selectImage:nil];
     
+    [self.shotTableView addPullToRefreshWithActionHandler:^{
+        // request shots data
+//        DRApiClient 
+    }];
+    self.shotTableView.pullToRefreshView.arrowColor = APP_COLOR_BLUE;
+    self.shotTableView.pullToRefreshView.textColor = APP_COLOR_BLUE;
 }
 
 

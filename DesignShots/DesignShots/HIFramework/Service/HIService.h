@@ -10,5 +10,8 @@
 #define HIService_h
 
 #import "HIUIAnimation.h"
+#import "HINetService.h"
+#import "HIRequest.h"
+#import "Reachability.h"
 
 #endif /* HIService_h */

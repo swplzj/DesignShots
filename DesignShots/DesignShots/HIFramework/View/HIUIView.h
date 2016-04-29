@@ -9,26 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "HIUIActivityIndicatorView.h"
 
-// Application default config
-#define HI_UINAVIGATIONBAR_DEFAULT_TITLE_COLOR        [UIColor whiteColor]
-#define HI_UINAVIGATIONBAR_DEFAULT_TITLE_SHADOW_COLOR HI_RGBA(0, 0, 0, 0)
-#define HI_UINAVIGATIONBAR_DEFAULT_IMAGE_IOS7_BEFORE  nil//[UIImage imageNamed:@"HInavbar_bg.png" useCache:YES]
-#define HI_UINAVIGATIONBAR_DEFAULT_IMAGE_IOS7_LATER   nil//[UIImage imageNamed:@"HIios7_navbar_bg.png" useCache:YES]
-
-#define HI_UINAVIGATION_BAR_DEFAULT_BUTTON_TITLE_COLOR        [UIColor darkGrayColor]
-
-#define HI_UIPULLLOADER_DEFAULT_HEIGHT (45.f)
-
-#define HI_TABLE_DEFAULT_STYLE            (UITableViewStyleGrouped)
-#define HI_TABLE_DEFAULT_BACKGROUND_COLOR ([UIColor whiteColor])
-
-
-@interface HIUIView : UIView
-
-
-
-@end
-
 
 // import
 #import "HIUIButton.h"
@@ -78,3 +58,22 @@
 #import "UIApplication+HIPresentViewController.h"
 #import "UITextField+HIToolbarOnKeyboard.h"
 
+// Application default config
+#define HI_UINAVIGATIONBAR_DEFAULT_TITLE_COLOR        [UIColor whiteColor]
+#define HI_UINAVIGATIONBAR_DEFAULT_TITLE_SHADOW_COLOR HI_RGBA(0, 0, 0, 0)
+#define HI_UINAVIGATIONBAR_DEFAULT_IMAGE_IOS7_BEFORE  nil//[UIImage imageNamed:@"HInavbar_bg.png" useCache:YES]
+#define HI_UINAVIGATIONBAR_DEFAULT_IMAGE_IOS7_LATER   nil//[UIImage imageNamed:@"HIios7_navbar_bg.png" useCache:YES]
+
+#define HI_UINAVIGATION_BAR_DEFAULT_BUTTON_TITLE_COLOR        [UIColor darkGrayColor]
+
+#define HI_UIPULLLOADER_DEFAULT_HEIGHT (45.f)
+
+#define HI_TABLE_DEFAULT_STYLE            (UITableViewStyleGrouped)
+#define HI_TABLE_DEFAULT_BACKGROUND_COLOR ([UIColor whiteColor])
+
+
+@interface HIUIView : UIView
+
+
+
+@end

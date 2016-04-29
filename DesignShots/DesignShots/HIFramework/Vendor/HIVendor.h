@@ -17,5 +17,6 @@
 #import "NXOAuth2.h"
 #import "MBProgressHUD.h"
 #import "JSONKit.h"
+#import "DribbbleSDK.h"
 
 #endif /* HIVendor_h */
