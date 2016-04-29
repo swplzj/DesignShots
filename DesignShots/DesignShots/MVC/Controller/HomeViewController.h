@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
+/**
+ *  Home: show shots list
+ */
 @interface HomeViewController : UIViewController
 
 @end

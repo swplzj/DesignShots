@@ -21,15 +21,35 @@
     
     
     self.window = [[UIWindow alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
-    
+    self.window.backgroundColor = [UIColor whiteColor];
     HomeViewController *homeVC = [[HomeViewController alloc] init];
     
-    UINavigationController *rootNav = [[UINavigationController alloc] initWithRootViewController:homeVC];
+    HIUINavigationController *rootNav = [[HIUINavigationController alloc] initWithRootViewController:homeVC];
+    
     self.window.rootViewController = rootNav;
+    
+    [self configureApplication:application withOptions:launchOptions];
     
     [self.window makeKeyAndVisible];
     
     return YES;
+}
+
+- (void)configureApplication:(UIApplication *)application withOptions:(NSDictionary *)launchOptions
+{
+    // setup view appearance
+    [self configureViewAppearance];
+}
+
+- (void)configureViewAppearance
+{
+    /** setup UINavigationBar */
+//    [[UINavigationBar appearance] setBarTintColor:APP_COLOR_BLUE];
+    [[UINavigationBar appearance] setBarStyle:UIBarStyleBlack];
+    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageWithColor:APP_COLOR_BLUE size:CGSizeMake(SCREEN_WIDTH, 64)] forBarMetrics:UIBarMetricsDefault];
+    [[UINavigationBar appearance] setTitleTextAttributes:@{
+                                                           NSFontAttributeName: [UIFont boldSystemFontOfSize:18],
+                                                           NSForegroundColorAttributeName: [UIColor whiteColor]}];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

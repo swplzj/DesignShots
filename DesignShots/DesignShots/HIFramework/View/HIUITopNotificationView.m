@@ -113,7 +113,7 @@
     self.label.font = [UIFont systemFontOfSize:17.0f];
     self.label.lineBreakMode = NSLineBreakByTruncatingTail;
     self.label.numberOfLines = 3;
-    self.label.textAlignment = UITextAlignmentLeft;
+    self.label.textAlignment = NSTextAlignmentLeft;
     self.label.textColor = [UIColor whiteColor];
     
     

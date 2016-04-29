@@ -8,6 +8,13 @@
 
 #import "HomeViewController.h"
 
+/** Controller */
+
+
+/** View */
+#import "ShotCell.h"
+
+
 @interface HomeViewController ()<UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) UITableView *shotTableView;
@@ -22,12 +29,11 @@
     self.title = @"Design Shots";
     self.view.backgroundColor = [UIColor whiteColor];
     
-    /** UIColor */
-#define HI_RGB(R,G,B)       [UIColor colorWithRed:R/255.0 green:G/255.0 blue:B/255.0 alpha:1.0]
-#define HI_RGBA(R,G,B,A)    [UIColor colorWithRed:R/255.0 green:G/255.0 blue:B/255.0 alpha:A]
-#define HI_HEX_RGB(V)       [UIColor]
-#
-//    [UIColor ]
+//    [self showBarButton:NavigationBarButtonTypeLeft
+//                  title:@""
+//                  image:[UIImage imageNamed:@"nav_back_icon"]
+//            selectImage:nil];
+    
 }
 
 
@@ -74,12 +80,13 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"CellIdentifier";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    static NSString *CellIdentifier = @"ShotCell";
+    ShotCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+        cell = [[ShotCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
-    cell.textLabel.text = @"Dribble";
+//    cell.textLabel.text = @"Dribble";
+    cell.shotImageView.image = [UIImage imageNamed:@"mainicon0"];
     return cell;
 }
 
@@ -97,7 +104,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 44.0f;
+    return 309.0f;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section

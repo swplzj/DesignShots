@@ -268,7 +268,7 @@
 {
     NSURL *url = [request URL];
     NSLog(@"url = %@", url);
-    NSString *urlString = [url absoluteString];
+//    NSString *urlString = [url absoluteString];
     
     //self.hud = [self showLoadingHud:TEXT_NET_LOADING];
     return YES;

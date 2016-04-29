@@ -9,4 +9,8 @@
 #ifndef CONSTS_h
 #define CONSTS_h
 
+#define APP_COLOR_BLUE HI_RGB(24, 184, 222)
+
+
+
 #endif /* CONSTS_h */
