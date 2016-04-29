@@ -9,9 +9,7 @@
 #import "HIBaseRequest.h"
 #import "HINetworkAgent.h"
 #import "HINetworkPrivate.h"
-#import "UCUserInfo.h"
-#import "UCSecurityTools.h"
-#import "UCUDIDTools.h"
+
 
 @implementation HIBaseRequest
 
@@ -32,7 +30,7 @@
 }
 
 - (NSString *)baseURL {
-    return API_PURE_DOMAIN;
+    return kBaseApiUrl;
 }
 
 - (NSTimeInterval)requestTimeoutInterval {
@@ -60,41 +58,11 @@
 }
 
 - (NSDictionary *)requestHeaderFieldValueDictionary {
-//    NSString *pStrAuthorzation = [NSString stringWithFormat:@"Bearer %@", [UCUserInfo getLocalUserInfo].secret_AccessToken];
-//    NSString *pStrUDID = [UCUDIDTools UDID];
-//    
-//    NSData *bodyData = [UCSecurityTools EncryptedAESData:self.requestParameter];
-//    NSString *pStrBodyLength = [NSString stringWithFormat:@"%lu", (unsigned long)[bodyData length]];
-//    return @{
-//             @"Content-Length":pStrBodyLength,
-//             @"Authorization": pStrAuthorzation,
-//             @"Client-Id": pStrUDID
-//             };
-
     return nil;
 }
 
 - (NSURLRequest *)buildCustomURLRequest {
-   if(self.requestMethod == HIRequestMethodGet){
-        return nil;
-    }
-
-    NSData *bodyData = [UCSecurityTools EncryptedAESData:self.requestParameter];
-    
-    NSMutableURLRequest *request = [self getRequestByUrlString:self.requestURL];
-    if(self.requestMethod == HIRequestMethodPost){
-        [request setHTTPMethod:@"POST"];
-    }
-    request.HTTPBody = bodyData;
-    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    [request setValue:[NSString stringWithFormat:@"%lu", (unsigned long)[bodyData length]] forHTTPHeaderField:@"Content-Length"];
-    
-    NSString *pStrAuthorzation = [NSString stringWithFormat:@"Bearer %@", [UCUserInfo getLocalUserInfo].secret_AccessToken];
-    [request setValue:pStrAuthorzation forHTTPHeaderField:@"Authorization"];
-    NSString *pStrUDID = [UCUDIDTools UDID];
-    [request setValue:pStrUDID forHTTPHeaderField:@"Client-Id"];
-
-    return request;
+    return nil;
 }
 
 - (BOOL)isUseCDN {

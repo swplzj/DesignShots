@@ -14,6 +14,8 @@
 /** View */
 #import "ShotCell.h"
 
+/** API */
+#import "ShotApi.h"
 
 @interface HomeViewController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -33,18 +35,53 @@
 //                  title:@""
 //                  image:[UIImage imageNamed:@"nav_back_icon"]
 //            selectImage:nil];
-    
+    HI_WEAK_SELF;
     [self.shotTableView addPullToRefreshWithActionHandler:^{
         // request shots data
-//        DRApiClient 
+//        DRApiClient
+//        HI_WEAK_SELF
+        [weakSelf requstShotsData];
     }];
     self.shotTableView.pullToRefreshView.arrowColor = APP_COLOR_BLUE;
     self.shotTableView.pullToRefreshView.textColor = APP_COLOR_BLUE;
 }
 
+#pragma mark - Private Methods
 
-#pragma mark - AutoLayout Methods
-
+- (void)requstShotsData
+{
+    /*
+     animated
+     attachments
+     debuts
+     playoffs
+     rebounds
+     teams
+     
+     week
+     month
+     year
+     ever
+      
+     YYYY-MM-DD
+     
+     comments
+     recent
+     views
+     */
+    NSDictionary *dic = @{
+                          @"list": @"animated",
+                          @"timeframe": @"week",
+                          @"date": @"",
+                          @"sort": @""
+                          };
+    ShotApi *api = [[ShotApi alloc] init];
+    [api startWithCompletionBlockWithSuccess:^(HIBaseRequest *request) {
+        
+    } failure:^(HIBaseRequest *request) {
+        
+    }];
+}
 
 #pragma mark - AutoLayout Methods
 

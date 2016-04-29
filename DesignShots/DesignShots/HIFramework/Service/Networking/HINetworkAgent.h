@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <AFNetworking.h>
 #import "HIBaseRequest.h"
 
 @interface HINetworkAgent : NSObject
@@ -22,8 +21,5 @@
 
 // 根据 request 和 networkConfig 构建 URL
 - (NSString *)buildRequestURL:(HIBaseRequest *)request;
-
-- (void)setCompletionBlockWithSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
-                              failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
 @end

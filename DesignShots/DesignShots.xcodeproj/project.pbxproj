@@ -35,12 +35,12 @@
 		B15295121CD338DC00B2FF03 /* HIBatchRequestAgent.m in Sources */ = {isa = PBXBuildFile; fileRef = B15294FD1CD338DC00B2FF03 /* HIBatchRequestAgent.m */; };
 		B15295131CD338DC00B2FF03 /* HIChainRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B15294FF1CD338DC00B2FF03 /* HIChainRequest.m */; };
 		B15295141CD338DC00B2FF03 /* HIChainRequestAgent.m in Sources */ = {isa = PBXBuildFile; fileRef = B15295011CD338DC00B2FF03 /* HIChainRequestAgent.m */; };
-		B15295151CD338DC00B2FF03 /* HINetService.m in Sources */ = {isa = PBXBuildFile; fileRef = B15295031CD338DC00B2FF03 /* HINetService.m */; };
 		B15295161CD338DC00B2FF03 /* HINetworkAgent.m in Sources */ = {isa = PBXBuildFile; fileRef = B15295051CD338DC00B2FF03 /* HINetworkAgent.m */; };
 		B15295171CD338DC00B2FF03 /* HINetworkConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = B15295071CD338DC00B2FF03 /* HINetworkConfig.m */; };
 		B15295181CD338DC00B2FF03 /* HINetworkPrivate.m in Sources */ = {isa = PBXBuildFile; fileRef = B15295091CD338DC00B2FF03 /* HINetworkPrivate.m */; };
 		B15295191CD338DC00B2FF03 /* HIRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B152950B1CD338DC00B2FF03 /* HIRequest.m */; };
-		B152951A1CD338DC00B2FF03 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = B152950D1CD338DC00B2FF03 /* Reachability.m */; };
+		B152951A1CD338DC00B2FF03 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = B152950D1CD338DC00B2FF03 /* Reachability.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B152951E1CD3466300B2FF03 /* ShotApi.m in Sources */ = {isa = PBXBuildFile; fileRef = B152951D1CD3466300B2FF03 /* ShotApi.m */; };
 		B16415E41CD09259002885F2 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B16415E11CD09259002885F2 /* HomeViewController.m */; };
 		B164169E1CD0951C002885F2 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B16415E81CD0951C002885F2 /* AFHTTPRequestOperation.m */; };
 		B164169F1CD0951C002885F2 /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B16415EA1CD0951C002885F2 /* AFHTTPRequestOperationManager.m */; };
@@ -244,8 +244,6 @@
 		B15294FF1CD338DC00B2FF03 /* HIChainRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HIChainRequest.m; sourceTree = "<group>"; };
 		B15295001CD338DC00B2FF03 /* HIChainRequestAgent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HIChainRequestAgent.h; sourceTree = "<group>"; };
 		B15295011CD338DC00B2FF03 /* HIChainRequestAgent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HIChainRequestAgent.m; sourceTree = "<group>"; };
-		B15295021CD338DC00B2FF03 /* HINetService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HINetService.h; sourceTree = "<group>"; };
-		B15295031CD338DC00B2FF03 /* HINetService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HINetService.m; sourceTree = "<group>"; };
 		B15295041CD338DC00B2FF03 /* HINetworkAgent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HINetworkAgent.h; sourceTree = "<group>"; };
 		B15295051CD338DC00B2FF03 /* HINetworkAgent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HINetworkAgent.m; sourceTree = "<group>"; };
 		B15295061CD338DC00B2FF03 /* HINetworkConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HINetworkConfig.h; sourceTree = "<group>"; };
@@ -256,6 +254,9 @@
 		B152950B1CD338DC00B2FF03 /* HIRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HIRequest.m; sourceTree = "<group>"; };
 		B152950C1CD338DC00B2FF03 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		B152950D1CD338DC00B2FF03 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		B152951C1CD3466300B2FF03 /* ShotApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShotApi.h; sourceTree = "<group>"; };
+		B152951D1CD3466300B2FF03 /* ShotApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShotApi.m; sourceTree = "<group>"; };
+		B152951F1CD346A200B2FF03 /* API.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = API.h; sourceTree = "<group>"; };
 		B16415E01CD09259002885F2 /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		B16415E11CD09259002885F2 /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		B16415E71CD0951C002885F2 /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
@@ -638,6 +639,9 @@
 				B15294EF1CD3313000B2FF03 /* ApiClient.m */,
 				B15294F11CD331C800B2FF03 /* ApiClientSetting.h */,
 				B15294F21CD331C800B2FF03 /* ApiClientSetting.m */,
+				B152951C1CD3466300B2FF03 /* ShotApi.h */,
+				B152951D1CD3466300B2FF03 /* ShotApi.m */,
+				B152951F1CD346A200B2FF03 /* API.h */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -655,8 +659,6 @@
 				B15294FF1CD338DC00B2FF03 /* HIChainRequest.m */,
 				B15295001CD338DC00B2FF03 /* HIChainRequestAgent.h */,
 				B15295011CD338DC00B2FF03 /* HIChainRequestAgent.m */,
-				B15295021CD338DC00B2FF03 /* HINetService.h */,
-				B15295031CD338DC00B2FF03 /* HINetService.m */,
 				B15295041CD338DC00B2FF03 /* HINetworkAgent.h */,
 				B15295051CD338DC00B2FF03 /* HINetworkAgent.m */,
 				B15295061CD338DC00B2FF03 /* HINetworkConfig.h */,
@@ -1424,7 +1426,6 @@
 				B16416D81CD0951C002885F2 /* NSArray+JSONModel.m in Sources */,
 				B164188F1CD0BBAD002885F2 /* HIUIGraphView.m in Sources */,
 				B164180D1CD0BB15002885F2 /* HIUDID.m in Sources */,
-				B15295151CD338DC00B2FF03 /* HINetService.m in Sources */,
 				B15294EC1CD32F7800B2FF03 /* LoginViewController.m in Sources */,
 				B16418791CD0BBAD002885F2 /* UIView+HIBackground.m in Sources */,
 				B164187D1CD0BBAD002885F2 /* UIView+HITag.m in Sources */,
@@ -1518,6 +1519,7 @@
 				B16417F91CD0BB15002885F2 /* NSNumber+HIExtension.m in Sources */,
 				B16416E31CD0951C002885F2 /* NSURL+NXOAuth2.m in Sources */,
 				B16418061CD0BB15002885F2 /* HIFileManager.m in Sources */,
+				B152951E1CD3466300B2FF03 /* ShotApi.m in Sources */,
 				B164188B1CD0BBAD002885F2 /* HIUIBadgeView.m in Sources */,
 				B16417FB1CD0BB15002885F2 /* NSObject+HIInstance.m in Sources */,
 				B16416DC1CD0951C002885F2 /* JSONKeyMapper.m in Sources */,

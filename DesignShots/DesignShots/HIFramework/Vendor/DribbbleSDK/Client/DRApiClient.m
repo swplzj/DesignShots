@@ -182,13 +182,14 @@ void DRLog(NSString *format, ...) {
     }
     id mappedObject = nil;
     if ([object isKindOfClass:[NSArray class]]) {
-        mappedObject = [(NSArray *)object bk_map:^id(id obj) {
-            if ([obj isKindOfClass:[NSDictionary class]]) {
-                return [[modelClass alloc] initWithDictionary:obj error:nil];
-            } else {
-                return [NSNull null];
-            }
-        }];
+        
+//        mappedObject = [(NSArray *)object bk_map:^id(id obj) {
+//            if ([obj isKindOfClass:[NSDictionary class]]) {
+//                return [[modelClass alloc] initWithDictionary:obj error:nil];
+//            } else {
+//                return [NSNull null];
+//            }
+//        }];
     } else if ([object isKindOfClass:[NSDictionary class]]) {
         mappedObject = [[modelClass alloc] initWithDictionary:object error:nil];
     }

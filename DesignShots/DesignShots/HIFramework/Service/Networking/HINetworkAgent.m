@@ -10,7 +10,6 @@
 #import "HINetworkAgent.h"
 #import "HINetworkConfig.h"
 #import "HINetworkPrivate.h"
-#import "UCRefreshTokenApi.h"
 #import "AppDelegate.h"
 
 @implementation HINetworkAgent {
@@ -192,6 +191,7 @@
     }
 }
 
+
 - (BOOL)checkResult:(HIBaseRequest *)request {
     BOOL result = [request isStatusCodeNormal];
     if (!result) {
@@ -205,17 +205,13 @@
     return result;
 }
 
+
 - (void)handleRequestResult:(AFHTTPRequestOperation *)operation {
     NSString *key = [self requestHashKey:operation];
     HIBaseRequest *request = _requestsRecord[key];
 
-    if(![request isKindOfClass:[UCRefreshTokenApi class]]){
-        _requestNormal = request;
-    }
-    // 打印
     NSLog(@"*******************  RequestData   *******************\n** URL:%@%@\n** Parameter:\n%@\n\n** Resoponse:\n%@\n*******************  End   *******************\n\n", [request baseURL], [request requestURL], [request requestParameter], [request responseJSONObject]);
 
-    NSLog(@"Finished Request: %@", NSStringFromClass([request class]));
     if (request) {
         BOOL succeed = [self checkResult:request];
         if (succeed) {
@@ -224,52 +220,22 @@
             if (request.delegate != nil) {
                 [request.delegate requestFinished:request];
             }
-            
-            NSDictionary *bodyDic = (NSDictionary *)[request responseJSONObject];
-            NSString *status = [bodyDic objectForKey:@"success"];
-            //当业务正常
-            if ([status isEqualToString:@"true"]) {
-                if (request.successCompletionBlock) {
-                    request.successCompletionBlock(request);
-                }
-            //当业务错误
-            }else{
-                NSDictionary *errorDic = [bodyDic objectForKey:@"error"];
-                //校验token是否失效
-                BOOL bTag = [self checkTokenIsInvalid:errorDic withRequest:_requestNormal];
-                if(bTag == FALSE){
-                    if (request.successCompletionBlock) {
-                        request.successCompletionBlock(request);
-                    }
-                }else{
-                    [request toggleAccessoriesDidStopCallBack];
-                    return;
-                }
+            if (request.successCompletionBlock) {
+                request.successCompletionBlock(request);
             }
-           
             [request toggleAccessoriesDidStopCallBack];
-            return;
         } else {
             NSLog(@"Request %@ failed, status code = %ld",
                    NSStringFromClass([request class]), (long)request.responseStatusCode);
-            
-            NSDictionary *bodyErrorDic = (NSDictionary *)(operation.responseObject);
-            NSDictionary *errorDic = [bodyErrorDic objectForKey:@"error"];
-            //校验token是否失效
-            BOOL bTag = [self checkTokenIsInvalid:errorDic withRequest:_requestNormal];
-            if(bTag == FALSE){
-                [request toggleAccessoriesWillStopCallBack];
-                [request requestFailedFilter];
-                if (request.delegate != nil) {
-                    [request.delegate requestFailed:request];
-                }
-                if (request.failureCompletionBlock) {
-                    request.failureCompletionBlock(request);
-                }
-                [request toggleAccessoriesDidStopCallBack];
-            }else{
-                return;
+            [request toggleAccessoriesWillStopCallBack];
+            [request requestFailedFilter];
+            if (request.delegate != nil) {
+                [request.delegate requestFailed:request];
             }
+            if (request.failureCompletionBlock) {
+                request.failureCompletionBlock(request);
+            }
+            [request toggleAccessoriesDidStopCallBack];
         }
     }
     [self removeOperation:operation];
@@ -294,81 +260,4 @@
     NSLog(@"Request queue size = %lu", (unsigned long)[_requestsRecord count]);
 }
 
-#pragma mark - private method
-- (AFSecurityPolicy * )getAFSecurityPolicy{
-    AFSecurityPolicy * securityPolicy;
-    NSString *pStrDoubleCheck = [[NSUserDefaults standardUserDefaults] objectForKey:HTTPS_DOUBLE_CHECK];
-    if([pStrDoubleCheck isEqualToString:@"YES"] == YES){
-        //AFSSLPinningModeCertificate
-        //这个模式表示用证书绑定方式验证证书，需要客户端保存有服务端的证书拷贝，这里验证分两步，第一步验证证书的域名/有效期等信息，第二步是对比服务端返回的证书跟客户端返回的是否一致。
-        securityPolicy = [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModeCertificate];
-        //如果是需要验证自建证书，需要设置为YES
-        securityPolicy.allowInvalidCertificates = YES;
-        //validatesDomainName，是否需要验证域名，默认为YES；
-        securityPolicy.validatesDomainName = NO;
-        //validatesCertificateChain,为YES,表示不校验证书链
-        securityPolicy.validatesCertificateChain = NO;
-        
-    }else{
-        securityPolicy = [AFSecurityPolicy new];
-        securityPolicy.allowInvalidCertificates = YES;
-    }
-    return securityPolicy;
-}
-
-- (BOOL)checkTokenIsInvalid:(NSDictionary*)errorDic withRequest:(HIBaseRequest*)requestBackUp{
-    if([errorDic isKindOfClass:[NSDictionary class]] == YES){
-        NSString *pStrCode = [errorDic objectForKey:@"code"];
-
-        if([pStrCode isKindOfClass:[NSString class]] == YES){
-            //当token错误，或者失效,重新请求token
-            if([pStrCode isEqualToString:@"4001"] == YES){
-                [self askToken:requestBackUp];
-                return TRUE;
-            }else if([pStrCode isEqualToString:@"402"] == YES){
-                [UCUITools exitSystem];
-                return NO;
-            }else if([pStrCode isEqualToString:@"401"] == YES){
-                [HIUIAlertView showAlertWithTitle:@"警告" message:@"您的账号已在其他设备上登录!" cancelTitle:@"确认" completion:^(BOOL cancelled, NSInteger buttonIndex) {
-                    [UCUITools exitSystem];
-                }];
-                return NO;
-            }
-        }
-        return FALSE;
-    }
-     return FALSE;
-}
-
-- (void)askToken:(HIBaseRequest*)requestBackUp{
-    
-    UCRefreshTokenApi *requestToken = [[UCRefreshTokenApi alloc] init];
-    HIBaseRequest *requestLast = requestBackUp;
-
-    [requestToken startWithCompletionBlockWithSuccess:^(HIBaseRequest *request) {
-        UCRefreshTokenApi *requestTemp = (UCRefreshTokenApi *)request;
-        //当是业务错误，直接回调到页面
-        if(requestTemp.responseError){
-              [UCUITools exitSystem];
-//            if (requestLast.successCompletionBlock) {
-//                requestLast.successCompletionBlock(request);
-//            }
-        //当请求完token,重新请求数据
-        }else{
-            [requestTemp saveRefreshTokenData];
-            [self requestLastAgain:requestLast];
-        }
-       
-    } failure:^(HIBaseRequest *request) {
-        if (requestLast.failureCompletionBlock) {
-            requestLast.failureCompletionBlock(request);
-        }
-
-    }];
-}
-
-- (void)requestLastAgain:(HIBaseRequest *)requestLast{
-    [requestLast setCompletionBlockWithSuccess:requestLast.successCompletionBlock failure:requestLast.failureCompletionBlock];
-    [requestLast start];
-}
 @end
