@@ -11,6 +11,7 @@
 
 #import "PureLayout.h"
 #import "AFNetworking.h"
+#import "UIKit+AFNetworking.h"
 #import "SVPullToRefresh.h"
 #import "FXBlurView.h"
 #import "JSONModelLib.h"

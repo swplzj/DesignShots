@@ -58,6 +58,16 @@
 }
 
 - (NSDictionary *)requestHeaderFieldValueDictionary {
+    
+    
+    NSString *pStrAuthorzation = [NSString stringWithFormat:@"Bearer %@", kOAuth2ClientAccessToken];
+
+    return @{
+             @"Authorization": pStrAuthorzation,
+//             @"client_id": kOAuth2ClientId
+             
+             };
+
     return nil;
 }
 

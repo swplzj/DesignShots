@@ -75,11 +75,12 @@
                           @"date": @"",
                           @"sort": @""
                           };
+    HI_WEAK_SELF;
     ShotApi *api = [[ShotApi alloc] init];
     [api startWithCompletionBlockWithSuccess:^(HIBaseRequest *request) {
-        
+        [weakSelf.shotTableView.pullToRefreshView stopAnimating];
     } failure:^(HIBaseRequest *request) {
-        
+        [weakSelf.shotTableView.pullToRefreshView stopAnimating];        
     }];
 }
 
@@ -130,6 +131,7 @@
     }
 //    cell.textLabel.text = @"Dribble";
     cell.shotImageView.image = [UIImage imageNamed:@"mainicon0"];
+//    [cell.shotImageView setImageWithURL:[] placeholderImage:<#(nullable UIImage *)#>];
     return cell;
 }
 
@@ -147,7 +149,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 309.0f;
+    return SHOT_IMAGE_HEIGHT;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
