@@ -71,6 +71,7 @@ v = NULL;                   \
 
 /** __block self */
 #define HI_BLOCK_SELF __block typeof(self) nRetainSelf = self
+#define HI_WEAK_SELF  __weak typeof(self) weakSelf = self;
 
 /** Fast animations */
 #define HI_FAST_ANIMATIONS(duration,animationsBlock) [UIView animateWithDuration:duration animations:animationsBlock]

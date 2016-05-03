@@ -209,7 +209,7 @@ static NSString *const appVersionAppLookupURLFormat = @"http://itunes.apple.com/
                 {
                     label.lineBreakMode = NSLineBreakByWordWrapping;
                     label.numberOfLines = 0;
-                    label.textAlignment = UITextAlignmentLeft;
+                    label.textAlignment = NSTextAlignmentLeft;
                     label.alpha = 1.0f;
                     [label sizeToFit];
                     offset = label.frame.size.height - frame.size.height;

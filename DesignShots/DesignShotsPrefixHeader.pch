@@ -14,5 +14,6 @@
 
 #include "CONSTS.h"
 #include "HI.h"
+#import "API.h"
 
 #endif /* DesignShotsPrefixHeader_pch */
