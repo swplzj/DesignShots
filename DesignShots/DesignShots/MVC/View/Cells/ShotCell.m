@@ -7,6 +7,8 @@
 //
 
 #import "ShotCell.h"
+#import "ShotModel.h"
+#import "ImageModel.h"
 
 @interface ShotCell ()
 
@@ -52,6 +54,15 @@
         _shotImageView.backgroundColor = [UIColor whiteColor];
     }
     return _shotImageView;
+}
+
+- (void)setShotModel:(ShotModel *)shotModel
+{
+    if (shotModel == _shotModel) {
+        return;
+    }
+    _shotModel = shotModel;
+//    [self.shotImageView setImageWithURL:[NSURL URLWithString:shotModel.imageModel.teaser] placeholderImage:[UIImage imageNamed:@"mainicon0"]];
 }
 
 @end

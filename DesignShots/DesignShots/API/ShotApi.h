@@ -10,4 +10,6 @@
 
 @interface ShotApi : HIRequest
 
+- (NSArray *)responseShotList;
+
 @end

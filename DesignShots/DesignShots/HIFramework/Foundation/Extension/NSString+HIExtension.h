@@ -61,7 +61,7 @@ typedef NSMutableString *	(^NSMutableStringReplaceBlock)( NSString * string, NSS
 
 - (BOOL)empty;
 - (BOOL)notEmpty;
-
+- (BOOL)isBlankString;
 - (BOOL)is:(NSString *)other;
 - (BOOL)isNot:(NSString *)other;
 

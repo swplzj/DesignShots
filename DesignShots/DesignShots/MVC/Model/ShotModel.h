@@ -15,7 +15,7 @@
 @property (strong, nonatomic) NSNumber *shotId;
 @property (strong, nonatomic) NSNumber *width;
 @property (strong, nonatomic) NSNumber *height;
-@property (strong, nonatomic) NSNumber *viewCount;
+@property (strong, nonatomic) NSNumber *viewsCount;
 @property (strong, nonatomic) NSNumber *likesCount;
 @property (strong, nonatomic) NSNumber *commentsCount;
 @property (strong, nonatomic) NSNumber *attachmentsCount;
@@ -35,6 +35,10 @@
 @property (strong, nonatomic) NSArray *tags;
 @property (strong, nonatomic) ImageModel *imageModel;
 
+@property (nonatomic, readonly) NSString <Ignore>*defaultUrl;
+@property (nonatomic, copy) NSString <Ignore>*fileType;
+@property (nonatomic, readonly) NSNumber <Ignore>*authorityId;
 
+- (BOOL)isAnimation;
 
 @end

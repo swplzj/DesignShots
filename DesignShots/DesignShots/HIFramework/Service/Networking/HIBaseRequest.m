@@ -60,10 +60,10 @@
 - (NSDictionary *)requestHeaderFieldValueDictionary {
     
     
-    NSString *pStrAuthorzation = [NSString stringWithFormat:@"Bearer %@", kOAuth2ClientAccessToken];
+    NSString *authorzationToken = [NSString stringWithFormat:@"Bearer %@", kOAuth2ClientAccessToken];
 
     return @{
-             @"Authorization": pStrAuthorzation,
+             @"Authorization": authorzationToken,
 //             @"client_id": kOAuth2ClientId
              
              };
@@ -135,8 +135,8 @@
 }
 
 -(id)responseError {
-    NSString *status = [self.requestOperation.responseObject objectForKey:@"success"];
-    if ([status isEqualToString:@"true"]) {
+    NSString *status = [self.requestOperation.responseObject objectForKey:@"error"];
+    if ([status isBlankString]) {
         return nil;
     }else{
         return self.requestOperation.responseObject[@"error"];
@@ -146,12 +146,7 @@
     return self.requestOperation.error;
 }
 -(id)responseObject {
-    NSString *status = [self.requestOperation.responseObject objectForKey:@"success"];
-    if ([status isEqualToString:@"true"]) {
-        return self.requestOperation.responseObject;
-    }else{
-        return nil;
-   }
+    return self.requestOperation.responseObject;  
 }
 - (NSString *)responseString {
     return self.requestOperation.responseString;
@@ -163,6 +158,32 @@
 
 - (NSDictionary *)responseHeaders {
     return self.requestOperation.response.allHeaderFields;
+}
+
+//- (id)mappedDataFromResponseObject:(id)object modelClass:(Class)modelClass {
+//    if (modelClass == [NSNull class]) {
+//        return self.responseObject;
+//    }
+//}
+
+- (id)mappedDataWithModelClass:(Class)modelClass {
+    if (modelClass == [NSNull class]) {
+        return self.responseObject;
+    }
+    id mappedObject = nil;
+    if ([self.responseObject isKindOfClass:[NSArray class]]) {
+        NSMutableArray *result = [NSMutableArray arrayWithCapacity:[self.responseObject count]];
+        
+        [self.responseObject enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            id value = obj ?: [NSNull null];
+            [result addObject:value];
+            
+        }];
+        mappedObject = result;
+    } else if([self.responseObject isKindOfClass:[NSDictionary class]]) {
+        mappedObject = [[modelClass alloc] initWithDictionary:self.responseObject error:nil];
+    }
+    return mappedObject;
 }
 
 #pragma mark - Request Accessories

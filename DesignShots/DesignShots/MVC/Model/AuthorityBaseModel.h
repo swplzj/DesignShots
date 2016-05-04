@@ -36,6 +36,7 @@
 @property (copy, nonatomic) NSString *type;
 @property (copy, nonatomic) NSString <Optional>*bucketsUrl;
 @property (copy, nonatomic) NSString <Optional>*followersUrl;
+@property (copy, nonatomic) NSString <Optional>*projectsUrl;
 @property (copy, nonatomic) NSString <Optional>*followingUrl;
 @property (copy, nonatomic) NSString <Optional>*likesUrl;
 @property (copy, nonatomic) NSString <Optional>*membersUrl;

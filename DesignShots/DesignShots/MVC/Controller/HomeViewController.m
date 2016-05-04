@@ -14,12 +14,16 @@
 /** View */
 #import "ShotCell.h"
 
+/** Model */
+#import "ShotModel.h"
+
 /** API */
 #import "ShotApi.h"
 
 @interface HomeViewController ()<UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) UITableView *shotTableView;
+@property (nonatomic, strong) NSMutableArray *shotDataSource;
 @property (nonatomic, assign) BOOL didSetupConstraints;
 @end
 
@@ -30,7 +34,7 @@
 
     self.title = @"Design Shots";
     self.view.backgroundColor = [UIColor whiteColor];
-    
+    self.shotDataSource = [[NSMutableArray alloc] init];
 //    [self showBarButton:NavigationBarButtonTypeLeft
 //                  title:@""
 //                  image:[UIImage imageNamed:@"nav_back_icon"]
@@ -44,6 +48,7 @@
     }];
     self.shotTableView.pullToRefreshView.arrowColor = APP_COLOR_BLUE;
     self.shotTableView.pullToRefreshView.textColor = APP_COLOR_BLUE;
+    
 }
 
 #pragma mark - Private Methods
@@ -79,6 +84,11 @@
     ShotApi *api = [[ShotApi alloc] init];
     [api startWithCompletionBlockWithSuccess:^(HIBaseRequest *request) {
         [weakSelf.shotTableView.pullToRefreshView stopAnimating];
+        ShotApi *shotApi = (ShotApi *)request;
+        if (shotApi.responseObject) {
+            weakSelf.shotDataSource = [NSMutableArray arrayWithArray:[shotApi responseShotList]];
+        }
+        [weakSelf.shotTableView reloadData];
     } failure:^(HIBaseRequest *request) {
         [weakSelf.shotTableView.pullToRefreshView stopAnimating];        
     }];
@@ -119,7 +129,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 1;
+    return [self.shotDataSource count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -132,6 +142,7 @@
 //    cell.textLabel.text = @"Dribble";
     cell.shotImageView.image = [UIImage imageNamed:@"mainicon0"];
 //    [cell.shotImageView setImageWithURL:[] placeholderImage:<#(nullable UIImage *)#>];
+    cell.shotModel = self.shotDataSource[indexPath.row];
     return cell;
 }
 
