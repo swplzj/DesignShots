@@ -150,4 +150,7 @@ typedef void(^AFFormDataConstructingBlock)(id<AFMultipartFormData> forData);
 // 当 POST 的内容带有文件等富文本时使用
 - (AFFormDataConstructingBlock)formDataConstructingBodyBlock;
 
+/** 返回的数据进行模型映射 */
+- (id)mappedDataFromResponseObject:(id)object modelClass:(Class)modelClass;
+- (id)mappedDataWithModelClass:(Class)modelClass;
 @end

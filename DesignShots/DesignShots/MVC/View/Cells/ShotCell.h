@@ -10,8 +10,11 @@
 
 /** Dribbble Shot List Cell */
 
+@class ShotModel;
+
 @interface ShotCell : UITableViewCell
 
 @property (strong, nonatomic) UIImageView *shotImageView;
+@property (strong, nonatomic) ShotModel *shotModel;
 
 @end
