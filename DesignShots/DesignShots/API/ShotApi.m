@@ -34,7 +34,8 @@
     NSMutableArray *shotList = [NSMutableArray new];
     id responseObject = self.responseObject;
     if ([responseObject isKindOfClass:[NSArray class]]) {
-        [responseObject enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [responseObject enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            
             shot.shotId         = obj[@"id"];
             shot.width          = obj[@"width"];
             shot.height         = obj[@"height"];
@@ -85,7 +86,7 @@
             user.bucketsUrl     = userDic[@"buckets_url"];
             user.followingUrl   = userDic[@"following_url"];
             user.likesUrl       = userDic[@"likes_url"];
-            
+
 //            user.membersCount = userDic[@""];
             
 //            user.teamShotsUrl   = userDic[@""];
@@ -109,6 +110,8 @@
             @property (strong, nonatomic) NSString *updatedAt;
             @property (assign, nonatomic) BOOL canUploadShot;
             @property (assign, nonatomic) BOOL pro;
+            
+            
                 "buckets_count" = 0;
                 "can_upload_shot" = 1;
                 "comments_received_count" = 97;
