@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>A30E9034-3C9F-48EB-862A-F665221AA8B5</string>
+	<key>IDESourceControlProjectName</key>
+	<string>DesignShots</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>F036A75124B7112E0434A2BDE7B388F119FC3192</key>
+		<string>github.com:swplzj/DesignShots.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>DesignShots/DesignShots.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>F036A75124B7112E0434A2BDE7B388F119FC3192</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>github.com:swplzj/DesignShots.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>F036A75124B7112E0434A2BDE7B388F119FC3192</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>F036A75124B7112E0434A2BDE7B388F119FC3192</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Dribbble</string>
+		</dict>
+	</array>
+</dict>
+</plist>
