@@ -24,8 +24,8 @@
     self.window.backgroundColor = [UIColor whiteColor];
     HomeViewController *homeVC = [[HomeViewController alloc] init];
     
-    HIUINavigationController *rootNav = [[HIUINavigationController alloc] initWithRootViewController:homeVC];
-    
+    HIUINavigationController *rootNav = [[HIUINavigationController alloc] initWithNavigationBarClass:[SherginScrollableNavigationBar class] toolbarClass:nil];
+    [rootNav setViewControllers:@[homeVC]];
     self.window.rootViewController = rootNav;
     
     [self configureApplication:application withOptions:launchOptions];

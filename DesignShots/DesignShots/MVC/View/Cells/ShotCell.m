@@ -46,12 +46,25 @@
 
 #pragma mark - Getter And Setter
 
-- (UIImageView *)shotImageView
+//- (UIImageView *)shotImageView
+//{
+//    if (!_shotImageView) {
+//        _shotImageView = [UIImageView newAutoLayoutView];
+//        _shotImageView.contentMode = UIViewContentModeScaleAspectFit;
+//        _shotImageView.backgroundColor = [UIColor whiteColor];
+//    }
+//    return _shotImageView;
+//}
+
+
+- (FLAnimatedImageView *)shotImageView
 {
     if (!_shotImageView) {
-        _shotImageView = [UIImageView newAutoLayoutView];
-        _shotImageView.contentMode = UIViewContentModeScaleAspectFit;
+        _shotImageView = [FLAnimatedImageView newAutoLayoutView];
+//        _shotImageView.contentMode = UIViewContentModeScaleAspectFit;
         _shotImageView.backgroundColor = [UIColor whiteColor];
+        _shotImageView.contentMode = UIViewContentModeScaleAspectFill;
+        _shotImageView.clipsToBounds = YES;
     }
     return _shotImageView;
 }
@@ -62,7 +75,52 @@
         return;
     }
     _shotModel = shotModel;
-//    [self.shotImageView setImageWithURL:[NSURL URLWithString:shotModel.imageModel.teaser] placeholderImage:[UIImage imageNamed:@"mainicon0"]];
+    HI_WEAK_SELF;
+    
+    NSURL *imageUrl = [NSURL URLWithString:shotModel.defaultUrl];
+
+    if (shotModel.isAnimation) {
+
+//        FLAnimatedImage *animatedImage = [[FLAnimatedImage alloc] initWithAnimatedGIFData:[NSData dataWithContentsOfURL:imageUrl]];
+//        [self.shotImageView setAnimatedImage:animatedImage];
+        weakSelf.shotImageView.image = nil;
+
+        [self loadAnimatedImageWithURL:imageUrl completion:^(FLAnimatedImage *animatedImage) {
+            weakSelf.shotImageView.animatedImage = animatedImage;
+        }];
+    } else {
+        self.shotImageView.animatedImage = nil;
+
+        [self.shotImageView setImageWithURL:imageUrl placeholderImage:[UIImage imageNamed:@"mainicon0"]];
+    }
+}
+
+- (void)loadAnimatedImageWithURL:(NSURL *const)url completion:(void (^)(FLAnimatedImage *animatedImage))completion
+{
+    NSString *const filename = url.lastPathComponent;
+    NSString *const diskPath = [NSHomeDirectory() stringByAppendingPathComponent:filename];
+    
+    NSData * __block animatedImageData = [[NSFileManager defaultManager] contentsAtPath:diskPath];
+    FLAnimatedImage * __block animatedImage = [[FLAnimatedImage alloc] initWithAnimatedGIFData:animatedImageData];
+    
+    if (animatedImage) {
+        if (completion) {
+            completion(animatedImage);
+        }
+    } else {
+        [[[NSURLSession sharedSession] dataTaskWithURL:url completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+            animatedImageData = data;
+            animatedImage = [[FLAnimatedImage alloc] initWithAnimatedGIFData:animatedImageData];
+            if (animatedImage) {
+                if (completion) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        completion(animatedImage);
+                    });
+                }
+                [data writeToFile:diskPath atomically:YES];
+            }
+        }] resume];
+    }
 }
 
 @end

@@ -30,11 +30,12 @@
 
 - (NSArray *)responseShotList {
 //    return (NSArray *)[self mappedDataWithModelClass:[ShotModel class]];
-    ShotModel *shot = [[ShotModel alloc] init];
-    NSMutableArray *shotList = [NSMutableArray new];
+    NSMutableArray *shotList = [[NSMutableArray alloc] init];
     id responseObject = self.responseObject;
     if ([responseObject isKindOfClass:[NSArray class]]) {
         [responseObject enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            ShotModel *shot = [[ShotModel alloc] init];
+
             shot.shotId         = obj[@"id"];
             shot.width          = obj[@"width"];
             shot.height         = obj[@"height"];
@@ -56,18 +57,19 @@
             shot.reboundsUrl    = obj[@"rebounds_url"];
             shot.tags           = obj[@"tags"];
             
+            /** image model*/
             NSDictionary *imageDic = obj[@"images"];
-            
             ImageModel *image   = [[ImageModel alloc] init];
             image.hidpi         = imageDic[@"hidpi"];
             image.normal        = imageDic[@"normal"];
             image.teaser        = imageDic[@"teaser"];
+            shot.imageModel = image;
             
             shot.createdAt      = obj[@"created_at"];
             shot.updatedAt      = obj[@"updated_at"];
             
+            /** user model */
             NSDictionary *userDic = obj[@"user"];
-            
             UserModel *user = [[UserModel alloc] init];
             user.userId     = userDic[@"id"];
             user.teamsUrl   = userDic[@"teams_url"];
@@ -78,62 +80,49 @@
             user.htmlUrl    = userDic[@"html_url"];
             user.location   = userDic[@"location"];
             user.bio        = userDic[@"bio"];
-            user.followersUrl = userDic[@"followers_url"];
+            user.followersUrl   = userDic[@"followers_url"];
             user.shotsUrl       = userDic[@"shots_url"];
             user.projectsCount  = userDic[@"projects_count"];
             user.projectsUrl    = userDic[@"projects_url"];
             user.bucketsUrl     = userDic[@"buckets_url"];
             user.followingUrl   = userDic[@"following_url"];
             user.likesUrl       = userDic[@"likes_url"];
+            user.followersCount = userDic[@"followers_count"];
+            user.followingsCount= userDic[@"followings_count"];
+            user.likesCount     = userDic[@"likes_count"];
+            user.bucketsCount   = userDic[@"buckets_count"];
+            user.commentsReceivedCount  = userDic[@"comments_received_count"];
+            user.likesReceivedCount     = userDic[@"likes_received_count"];
+            user.reboundsReceivedCount  = userDic[@"rebounds_received_count"];
+            user.shotsCount             = userDic[@"shots_count"];
+            user.type                   = userDic[@"type"];
+            user.createdAt              = userDic[@"created_at"];
+            user.updatedAt              = userDic[@"updated_at"];
+            user.canUploadShot          = userDic[@"can_upload_shot"];
+            user.pro                    = userDic[@"pro"];
+            
+            LinkModel *link             = [[LinkModel alloc] init];
+            link.twitter                = userDic[@"links"][@"twitter"];
+            link.web                    = userDic[@"links"][@"web"];
+            user.linkModel = link;
+            shot.userModel = user;
+            
+            NSDictionary *teamDic = obj[@"team"];
+            TeamModel *team = [[TeamModel alloc] init];
+            if ([teamDic isKindOfClass:[NSDictionary class]]) {
+                team.teamId = teamDic[@""];
+            }
+            shot.teamModel = team;
             
 //            user.membersCount = userDic[@""];
             
 //            user.teamShotsUrl   = userDic[@""];
 //            user.membersUrl     = userDic[@""];
-            
-            @property (strong, nonatomic) DRLink *links;
-            
-            
-        
-            @property (strong, nonatomic) NSNumber *followersCount;
-            @property (strong, nonatomic) NSNumber *followingsCount;
-            @property (strong, nonatomic) NSNumber *likesCount;
-            @property (strong, nonatomic) NSNumber *projectsCount;
-            @property (strong, nonatomic) NSNumber *bucketsCount;
-            @property (strong, nonatomic) NSNumber *commentsReceivedCount;
-            @property (strong, nonatomic) NSNumber *likesReceivedCount;
-            @property (strong, nonatomic) NSNumber *reboundsReceivedCount;
-            @property (strong, nonatomic) NSNumber *shotsCount;
-            @property (strong, nonatomic) NSString *type;
-            @property (strong, nonatomic) NSString *createdAt;
-            @property (strong, nonatomic) NSString *updatedAt;
-            @property (assign, nonatomic) BOOL canUploadShot;
-            @property (assign, nonatomic) BOOL pro;
-                "buckets_count" = 0;
-                "can_upload_shot" = 1;
-                "comments_received_count" = 97;
-                "created_at" = "2016-01-18T08:40:28Z";
-                "followers_count" = 213;
-                "followings_count" = 82;
-                "likes_count" = 49;
-                "likes_received_count" = 3189;
-            
-                links =             {
-                    twitter = "https://twitter.com/reggidlol";
-                };
-                pro = 0;
-                "projects_url" = "https://api.dribbble.com/v1/users/1056629/projects";
-                "rebounds_received_count" = 1;
-                "shots_count" = 16;
-                
-                type = Player;
-                "updated_at" = "2016-05-04T07:13:50Z";
-            };
-
-            
-            [shotList addObject:obj];
+   
+            [shotList addObject:shot];
         }];
     }
+    return shotList;
 }
 
 @end

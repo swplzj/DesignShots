@@ -35,5 +35,6 @@
 #import "NSNumber+HIExtension.h"
 #import "NSObject+HIInstance.h"
 #import "NSObject+HIProperty.h"
+#import "NSObject+HIBlankString.h"
 
 #endif

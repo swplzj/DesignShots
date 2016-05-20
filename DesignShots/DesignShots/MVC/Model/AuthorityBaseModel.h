@@ -24,9 +24,9 @@
 @property (copy, nonatomic) NSString <Optional>*location;
 @property (strong, nonatomic) LinkModel *linkModel;
 @property (strong, nonatomic) NSNumber *bucketsCount;
-@property (strong, nonatomic) NSNumber *commentReceivedCount;
+@property (strong, nonatomic) NSNumber *commentsReceivedCount;
 @property (strong, nonatomic) NSNumber *followersCount;
-@property (strong, nonatomic) NSNumber *followingCount;
+@property (strong, nonatomic) NSNumber *followingsCount;
 @property (strong, nonatomic) NSNumber *likesCount;
 @property (strong, nonatomic) NSNumber *likesReceivedCount;
 @property (strong, nonatomic) NSNumber <Optional>*membersCount;

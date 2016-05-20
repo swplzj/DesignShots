@@ -14,7 +14,7 @@
 
 @interface ShotCell : UITableViewCell
 
-@property (strong, nonatomic) UIImageView *shotImageView;
+@property (strong, nonatomic) FLAnimatedImageView *shotImageView;
 @property (strong, nonatomic) ShotModel *shotModel;
 
 @end

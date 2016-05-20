@@ -136,7 +136,7 @@
 
 -(id)responseError {
     NSString *status = [self.requestOperation.responseObject objectForKey:@"error"];
-    if ([status isBlankString]) {
+    if ([self isBlankString:status]) {
         return nil;
     }else{
         return self.requestOperation.responseObject[@"error"];

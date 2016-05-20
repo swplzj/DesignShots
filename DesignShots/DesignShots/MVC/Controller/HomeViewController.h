@@ -11,6 +11,6 @@
 /**
  *  Home: show shots list
  */
-@interface HomeViewController : UIViewController
+@interface HomeViewController : HIUIViewController
 
 @end

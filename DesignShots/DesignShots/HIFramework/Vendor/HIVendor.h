@@ -19,5 +19,8 @@
 #import "MBProgressHUD.h"
 #import "JSONKit.h"
 #import "DribbbleSDK.h"
+#import "FLAnimatedImage.h"
+#import "TLYShyNavBar.h"
+#import "SherginScrollableNavigationBar.h"
 
 #endif /* HIVendor_h */

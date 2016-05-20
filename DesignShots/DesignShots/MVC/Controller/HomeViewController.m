@@ -9,10 +9,11 @@
 #import "HomeViewController.h"
 
 /** Controller */
-
+#import "ShotDetailViewController.h"
 
 /** View */
 #import "ShotCell.h"
+#import "BlurAnimateMenu.h"
 
 /** Model */
 #import "ShotModel.h"
@@ -24,6 +25,7 @@
 
 @property (nonatomic, strong) UITableView *shotTableView;
 @property (nonatomic, strong) NSMutableArray *shotDataSource;
+@property (strong, nonatomic) BlurAnimateMenu *animateMenu;
 @property (nonatomic, assign) BOOL didSetupConstraints;
 @end
 
@@ -35,23 +37,45 @@
     self.title = @"Design Shots";
     self.view.backgroundColor = [UIColor whiteColor];
     self.shotDataSource = [[NSMutableArray alloc] init];
-//    [self showBarButton:NavigationBarButtonTypeLeft
-//                  title:@""
-//                  image:[UIImage imageNamed:@"nav_back_icon"]
-//            selectImage:nil];
+  
+    [self addNavigationItems];
+    
     HI_WEAK_SELF;
     [self.shotTableView addPullToRefreshWithActionHandler:^{
-        // request shots data
-//        DRApiClient
-//        HI_WEAK_SELF
         [weakSelf requstShotsData];
     }];
     self.shotTableView.pullToRefreshView.arrowColor = APP_COLOR_BLUE;
     self.shotTableView.pullToRefreshView.textColor = APP_COLOR_BLUE;
+    [self requstShotsData];
+    [[self.shotTableView pullToRefreshView] startAnimating];
+
+    ((SherginScrollableNavigationBar *)self.navigationController.navigationBar).scrollView = self.shotTableView;
+
     
+//    self.shyNavBarManager.scrollView = self.shotTableView;
+//    [self.shyNavBarManager setStickyNavigationBar:NO];
+
+//    [self.shyNavBarManager setFadeBehavior:self.fadeBehavior];
+
 }
 
 #pragma mark - Private Methods
+
+- (void)addNavigationItems
+{
+    [self showBarButton:NavigationBarButtonTypeLeft
+                  title:@""
+                  image:[UIImage imageNamed:@"nav_back_icon"]
+            selectImage:nil];
+    
+    [self showBarButton:NavigationBarButtonTypeLeft
+                  title:@""
+                  image:[UIImage imageNamed:@"nav_back_icon"]
+            selectImage:nil];
+//    self.navigationItem.leftBarButtonItems = @[];
+
+    
+}
 
 - (void)requstShotsData
 {
@@ -119,6 +143,16 @@
     [super updateViewConstraints];
 }
 
+#pragma mark - Event Response
+
+- (void)navigationBarButtonClick:(NavigationBarButtonType)type
+{
+    if (NavigationBarButtonTypeLeft == type) {
+        [self.view addSubview:self.animateMenu];
+    } else {
+        
+    }
+}
 
 #pragma mark - UITableView Datasource
 
@@ -139,9 +173,7 @@
     if (!cell) {
         cell = [[ShotCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
-//    cell.textLabel.text = @"Dribble";
-    cell.shotImageView.image = [UIImage imageNamed:@"mainicon0"];
-//    [cell.shotImageView setImageWithURL:[] placeholderImage:<#(nullable UIImage *)#>];
+    
     cell.shotModel = self.shotDataSource[indexPath.row];
     return cell;
 }
@@ -165,17 +197,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-    return 10;
-}
-
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-{
-    return nil;
-}
-
-- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
-{
-    return nil;
+    return 0;
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
@@ -185,7 +207,9 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    ShotDetailViewController *detailVC = [[ShotDetailViewController alloc] init];
+    detailVC.userInfo = self.shotDataSource[indexPath.row];
+    [self.navigationController pushViewController:detailVC animated:YES];
 }
 
 
@@ -197,8 +221,41 @@
         _shotTableView = [UITableView newAutoLayoutView];
         _shotTableView.delegate = self;
         _shotTableView.dataSource = self;
+        _shotTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     }
     return _shotTableView;
+}
+
+- (BlurAnimateMenu *)animateMenu
+{
+    if (!_animateMenu) {
+        _animateMenu = [[BlurAnimateMenu alloc] init];
+        _animateMenu.menuButtonActionBlock = ^(NSUInteger clickIndex) {
+            switch (clickIndex) {
+                case 0:
+                {
+                    break;
+                }
+                case 1:
+                {
+                    break;
+                }
+                case 2:
+                {
+                    break;
+                }
+                case 3:
+                {
+                    break;
+                }
+    
+                    
+                default:
+                    break;
+            }
+        };
+    }
+    return _animateMenu;
 }
 
 @end

@@ -11,6 +11,6 @@
 /**
  *  Shot Detail
  */
-@interface ShotDetailViewController : UIViewController
+@interface ShotDetailViewController : HIUIViewController
 
 @end

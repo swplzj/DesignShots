@@ -22,7 +22,13 @@ static NSString *const kFileExtensionGif = @"gif";
 //}
 
 - (NSString<Ignore> *)defaultUrl {
-    return self.imageModel.hidpi ? self.imageModel.hidpi : self.imageModel.normal;
+    
+//    if ([self.imageModel.hidpi isKindOfClass:[NSNull class]]) {
+//        return self.imageModel.normal;
+//    } else {
+//        return self.imageModel.hidpi;
+//    }
+    return [self isBlankString:self.imageModel.hidpi] ? self.imageModel.normal : self.imageModel.hidpi;
 }
 
 - (NSString<Ignore> *)fileType {
